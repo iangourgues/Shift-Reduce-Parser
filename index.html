@@ -40,6 +40,10 @@
   button:hover {
     background-color: #218838;
   }
+  button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
   table {
     width: 100%;
     margin-top: 20px;
@@ -54,6 +58,18 @@
     background-color: #007bff;
     color: white;
   }
+  .highlight {
+    background-color: yellow;
+  }
+  .highlight-green {
+    background-color: green;
+    color: white;
+}
+
+.highlight-red {
+    background-color: red;
+    color: white;
+}
 </style>
 </head>
 <body>
@@ -65,7 +81,10 @@
     <label for="expression">Enter expression:</label>
     <input type="text" id="expression" placeholder="expression here">
     <button onclick="parse()">Parse</button>
-  </section>
+    <button id="previousStepButton" onclick="previousStep()" disabled>Previous Step</button>
+    <button id="nextStepButton" onclick="nextStep()" disabled>Next Step</button>
+    <button id="lastStepButton" onclick="lastStep()" disabled>Last Step</button>
+</section>
   <section>
     <h2>Steps</h2>
     <table>
@@ -78,6 +97,171 @@
         </tr>
       </thead>
       <tbody id="steps">
+      </tbody>
+    </table>
+  </section>
+  <section>
+    <h2>Parse Table</h2>
+    <table id="parseTable">
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>id</th>
+          <th>+</th>
+          <th>*</th>
+          <th>(</th>
+          <th>)</th>
+          <th>$</th>
+          <th>E</th>
+          <th>T</th>
+          <th>F</th>
+        </tr>
+      </thead>
+      <tbody id="parseTableBody">
+        <tr id="state0">
+          <td>0</td>
+          <td id="0-id">S5</td>
+          <td id="0-+"></td>
+          <td id="0-*"></td>
+          <td id="0-(">S4</td>
+          <td id="0-)"></td>
+          <td id="0-$"></td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+        <tr id="state1">
+          <td>1</td>
+          <td id="1-id"></td>
+          <td id="1-+">S6</td>
+          <td id="1-*"></td>
+          <td id="1-("></td>
+          <td id="1-)"></td>
+          <td id="1-$">accept</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="state2">
+          <td>2</td>
+          <td id="2-id"></td>
+          <td id="2-+">R2</td>
+          <td id="2-*">S7</td>
+          <td id="2-("></td>
+          <td id="2-)">R2</td>
+          <td id="2-$">R2</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="state3">
+          <td>3</td>
+          <td id="3-id"></td>
+          <td id="3-+">R4</td>
+          <td id="3-*">R4</td>
+          <td id="3-("></td>
+          <td id="3-)">R4</td>
+          <td id="3-$">R4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="state4">
+          <td>4</td>
+          <td id="4-id">S5</td>
+          <td id="4-+"></td>
+          <td id="4-*"></td>
+          <td id="4-(">S4</td>
+          <td id="4-)"></td>
+          <td id="4-$"></td>
+          <td>8</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+        <tr id="state5">
+          <td>5</td>
+          <td id="5-id"></td>
+          <td id="5-+">R6</td>
+          <td id="5-*">R6</td>
+          <td id="5-("></td>
+          <td id="5-)">R6</td>
+          <td id="5-$">R6</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="state6">
+          <td>6</td>
+          <td id="6-id">S5</td>
+          <td id="6-+"></td>
+          <td id="6-*"></td>
+          <td id="6-(">S4</td>
+          <td id="6-)"></td>
+          <td id="6-$"></td>
+          <td></td>
+          <td>9</td>
+          <td>3</td>
+        </tr>
+        <tr id="state7">
+          <td>7</td>
+          <td id="7-id">S5</td>
+          <td id="7-+"></td>
+          <td id="7-*"></td>
+          <td id="7-(">S4</td>
+          <td id="7-)"></td>
+          <td id="7-$"></td>
+          <td></td>
+          <td></td>
+          <td>10</td>
+        </tr>
+        <tr id="state8">
+          <td>8</td>
+          <td id="8-id"></td>
+          <td id="8-+">S6</td>
+          <td id="8-*"></td>
+          <td id="8-("></td>
+          <td id="8-)">S11</td>
+          <td id="8-$"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="state9">
+          <td>9</td>
+          <td id="9-id"></td>
+          <td id="9-+">R1</td>
+          <td id="9-*">S7</td>
+          <td id="9-("></td>
+          <td id="9-)">R1</td>
+          <td id="9-$">R1</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="state10">
+          <td>10</td>
+          <td id="10-id"></td>
+          <td id="10-+">R3</td>
+          <td id="10-*">R3</td>
+          <td id="10-("></td>
+          <td id="10-)">R3</td>
+          <td id="10-$">R3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr id="state11">
+          <td>11</td>
+          <td id="11-id"></td>
+          <td id="11-+">R5</td>
+          <td id="11-*">R5</td>
+          <td id="11-("></td>
+          <td id="11-)">R5</td>
+          <td id="11-$">R5</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </section>

@@ -44,14 +44,22 @@
     background-color: #6c757d;
     cursor: not-allowed;
   }
+  .flex-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  section {
+    margin-right: 10px;
+  }
   table {
-    width: 100%;
+    width: auto;
     margin-top: 20px;
     border-collapse: collapse;
   }
   th, td {
     border: 1px solid #ddd;
-    padding: 12px;
+    padding: 8px;
     text-align: left;
   }
   th {
@@ -64,12 +72,14 @@
   .highlight-green {
     background-color: green;
     color: white;
-}
-
-.highlight-red {
+  }
+  .highlight-red {
     background-color: red;
     color: white;
-}
+  }
+  .highlight-rule {
+        background-color: #ffff99; /* Yellow background for emphasis */
+    }
 </style>
 </head>
 <body>
@@ -77,47 +87,40 @@
   <h1>Shift Reduce Parser GUI</h1>
 </header>
 <main>
-  <section style="padding: 20px;">
-    <label for="expression">Enter expression:</label>
-    <input type="text" id="expression" placeholder="expression here">
-    <button onclick="parse()">Parse</button>
-    <button id="previousStepButton" onclick="previousStep()" disabled>Previous Step</button>
-    <button id="nextStepButton" onclick="nextStep()" disabled>Next Step</button>
-    <button id="lastStepButton" onclick="lastStep()" disabled>Last Step</button>
-</section>
-  <section>
-    <h2>Steps</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Step</th>
-          <th>Stack</th>
-          <th>Input</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="steps">
-      </tbody>
-    </table>
-  </section>
-  <section>
-    <h2>Parse Table</h2>
-    <table id="parseTable">
-      <thead>
-        <tr>
-          <th>State</th>
-          <th>id</th>
-          <th>+</th>
-          <th>*</th>
-          <th>(</th>
-          <th>)</th>
-          <th>$</th>
-          <th>E</th>
-          <th>T</th>
-          <th>F</th>
-        </tr>
-      </thead>
-      <tbody id="parseTableBody">
+  <div class="flex-container">
+    <section>
+      <h2>Steps</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>Stack</th>
+            <th>Input</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="steps">
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Parse Table</h2>
+      <table id="parseTable">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>id</th>
+            <th>+</th>
+            <th>*</th>
+            <th>(</th>
+            <th>)</th>
+            <th>$</th>
+            <th>E</th>
+            <th>T</th>
+            <th>F</th>
+          </tr>
+        </thead>
+        <tbody id="parseTableBody">
         <tr id="state0">
           <td>0</td>
           <td id="0-id">S5</td>
@@ -265,6 +268,28 @@
       </tbody>
     </table>
   </section>
+  <section>
+    <h2>Grammar Rules</h2>
+    <table id="grammarRules">
+        <tr id="rule1"><td>1. E → E + T</td></tr>
+        <tr id="rule2"><td>2. E → T</td></tr>
+        <tr id="rule3"><td>3. T → T * F</td></tr>
+        <tr id="rule4"><td>4. T → F</td></tr>
+        <tr id="rule5"><td>5. F → (E)</td></tr>
+        <tr id="rule6"><td>6. F → id</td></tr>
+    </table>
+</section>
+</div>
+<section style="padding: 20px; display: flex; flex-direction: column; align-items: flex-start;">
+  <label for="expression">Enter expression:</label>
+  <input type="text" id="expression" placeholder="expression here" style="width: 300px; margin-bottom: 10px;">
+  <div>
+      <button onclick="parse()">Parse</button>
+      <button id="previousStepButton" onclick="previousStep()" disabled>Previous Step</button>
+      <button id="nextStepButton" onclick="nextStep()" disabled>Next Step</button>
+      <button id="lastStepButton" onclick="lastStep()" disabled>Last Step</button>
+  </div>
+</section>
 </main>
 <script src="parser.js"></script>
 </body>

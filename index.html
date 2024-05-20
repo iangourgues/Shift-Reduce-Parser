@@ -87,6 +87,16 @@
   <h1>Shift Reduce Parser GUI</h1>
 </header>
 <main>
+  <div>
+    <button onclick="parse()">Parse</button>
+    <button id="previousStepButton" onclick="previousStep()" disabled>Previous Step</button>
+    <button id="nextStepButton" onclick="nextStep()" disabled>Next Step</button>
+    <button id="lastStepButton" onclick="lastStep()" disabled>Last Step</button>
+</div>
+<section style="padding: 20px; display: flex; flex-direction: column; align-items: flex-start;">
+  <label for="expression">Enter expression:</label>
+  <input type="text" id="expression" placeholder="expression here" style="width: 300px; margin-bottom: 10px;">
+</section>
   <div class="flex-container">
     <section>
       <h2>Steps</h2>
@@ -280,16 +290,6 @@
     </table>
 </section>
 </div>
-<section style="padding: 20px; display: flex; flex-direction: column; align-items: flex-start;">
-  <label for="expression">Enter expression:</label>
-  <input type="text" id="expression" placeholder="expression here" style="width: 300px; margin-bottom: 10px;">
-  <div>
-      <button onclick="parse()">Parse</button>
-      <button id="previousStepButton" onclick="previousStep()" disabled>Previous Step</button>
-      <button id="nextStepButton" onclick="nextStep()" disabled>Next Step</button>
-      <button id="lastStepButton" onclick="lastStep()" disabled>Last Step</button>
-  </div>
-</section>
 </main>
 <script src="parser.js"></script>
 </body>
